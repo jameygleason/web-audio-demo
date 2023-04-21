@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Audio Demo for Safari</title>
+		<link
+			rel="icon"
+			href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 16 16'><text x='0' y='14'>💩</text></svg>"
+		/>
+		<script src="/main.js" defer></script>
+	</head>
+	<body>
+		<main>
+			<div>
+				<button class="recursion">Recursion</button>
+				<button class="async-loop">Async Loop</button>
+				<button class="recursion-timeout">Recursion With Timeout</button>
+				<button class="recursion-speech">Recursion With Speech Synthesis</button>
+				<button class="recursion-audio-speech">Recursion With Audio and Speech Synthesis</button>
+				<button class="async-audio-speech">Async With Audio and Speech Synthesis</button>
+			</div>
+
+			<audio src="https://soundbible.com/mp3/light-switch-pull-chain-daniel_simon.mp3" controls></audio>
+		</main>
+
+		<style>
+			main {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				height: 60vh;
+			}
+
+			div {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				align-items: center;
+				gap: 8px;
+				max-width: 375px;
+			}
+
+			button {
+				height: 44px;
+				width: 175px;
+			}
+
+			audio {
+				margin-top: 24px;
+			}
+		</style>
+	</body>
+</html>

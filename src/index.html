@@ -9,6 +9,7 @@
 			rel="icon"
 			href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 16 16'><text x='0' y='14'>💩</text></svg>"
 		/>
+		<meta property="og:image" content="/static/web-audio-og.jpg" />
 		<script src="/main.js" defer></script>
 	</head>
 	<body>
@@ -49,8 +50,8 @@
 				</p>
 				<p>
 					This is a good feature, but it is very limiting in it's current state. It will allow you to play audio
-					sequentially if there are no asynchronous calls. When asynchrony is introduced, Safari stops playing the
-					audio.
+					sequentially if there are no asynchronous calls (👈 not strictly true research is WIP). When asynchrony is
+					introduced, Safari stops playing the audio.
 				</p>
 
 				<p>
@@ -61,8 +62,8 @@
 				<h2>Why is this an issue?</h2>
 				<p>
 					It removes the possibility of a certain class of sites and apps existing. Think of "turn by turn" directions
-					in a map app or having a delay between songs in a playlist that is auto playing. Many more example exist and
-					I'm happy to take pull requests for use cases.
+					in a map app or having a delay between songs in a playlist that is auto playing. Games! Many more example
+					exist and I'm happy to take pull requests for use cases.
 				</p>
 
 				<h2>One solution</h2>

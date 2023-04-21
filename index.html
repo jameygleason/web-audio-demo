@@ -29,6 +29,11 @@
 				</div>
 
 				<audio src="https://soundbible.com/mp3/light-switch-pull-chain-daniel_simon.mp3" controls></audio>
+
+				<p class="center small">
+					Please help me improvement the agreeableness of the sound clips. These are irritating which is kind of the
+					opposite of what I'm trying to achieve here.
+				</p>
 			</section>
 
 			<section>
@@ -63,7 +68,11 @@
 			</section>
 
 			<footer>
-				<a href="https://jamesgleason.tech/">More info @ jamesgleason.tech</a>
+				<p class="small">
+					For improvements to this demo, please interact on
+					<a href="https://github.com/jameygleason/web-audio-demo">Github</a>.
+				</p>
+				<p class="small">More info @ <a href="https://jamesgleason.tech/">jamesgleason.tech</a></p>
 			</footer>
 		</main>
 
@@ -109,9 +118,22 @@
 
 			footer {
 				display: flex;
-				justify-content: center;
-				align-items: flex-end;
+				flex-direction: column;
+				justify-content: flex-end;
+				align-items: center;
 				min-height: 100px;
+			}
+
+			p.small {
+				font-size: 16px;
+				line-height: 1.2;
+				margin: 0px;
+			}
+
+			p.center {
+				text-align: center;
+				max-width: 570px;
+				margin: 12px;
 			}
 		</style>
 	</body>

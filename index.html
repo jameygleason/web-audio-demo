@@ -20,12 +20,17 @@
 
 			<section class="demo">
 				<div>
-					<button class="recursion">Recursion</button>
-					<button class="async-loop">Async Loop</button>
-					<button class="recursion-timeout">Recursion With Timeout</button>
-					<button class="recursion-speech">Recursion With Speech Synthesis</button>
-					<button class="recursion-audio-speech">Recursion With Audio and Speech Synthesis</button>
-					<button class="async-audio-speech">Async With Audio and Speech Synthesis</button>
+					<button class="small works">Works</button>
+					<button class="small todo">Todo</button>
+					<button class="small broken">Broken</button>
+				</div>
+				<div>
+					<button class="recursion works">Recursion</button>
+					<button class="async-loop works">Async Loop</button>
+					<button class="recursion-timeout works">Recursion With Timeout</button>
+					<button class="recursion-speech works">Recursion With Speech Synthesis</button>
+					<button class="recursion-audio-speech todo">Recursion With Audio and Speech Synth.</button>
+					<button class="async-audio-speech broken">Async With Audio and Speech Synthesis</button>
 				</div>
 
 				<!-- https://soundbible.com/2167-Light-Pull-Chain.html -->
@@ -105,12 +110,25 @@
 				justify-content: center;
 				align-items: center;
 				gap: 8px;
-				max-width: 375px;
+				max-width: 400px;
+				margin: 16px 0;
 			}
 
 			button {
-				height: 44px;
-				width: 175px;
+				border-radius: 4px;
+				border: none;
+				box-shadow: 0 2px 4px 0px rgb(50 50 93 / 0.25), 0 4px 8px 0px rgb(0 0 0 / 0.3);
+				font-size: 18px;
+				font-weight: bold;
+				height: 80px;
+				flex: 1 1 48%;
+				text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+			}
+
+			button.small {
+				height: 28px;
+				flex: 1 1 30%;
+				min-width: 96px;
 			}
 
 			audio {
@@ -135,6 +153,21 @@
 				text-align: center;
 				max-width: 570px;
 				margin: 12px;
+			}
+
+			.works {
+				background: #28a745;
+				color: white;
+			}
+
+			.broken {
+				background: #dc3545;
+				color: white;
+			}
+
+			.todo {
+				background: #ffc600;
+				color: #212529;
 			}
 		</style>
 	</body>

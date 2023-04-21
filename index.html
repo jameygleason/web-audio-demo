@@ -13,25 +13,80 @@
 	</head>
 	<body>
 		<main>
-			<div>
-				<button class="recursion">Recursion</button>
-				<button class="async-loop">Async Loop</button>
-				<button class="recursion-timeout">Recursion With Timeout</button>
-				<button class="recursion-speech">Recursion With Speech Synthesis</button>
-				<button class="recursion-audio-speech">Recursion With Audio and Speech Synthesis</button>
-				<button class="async-audio-speech">Async With Audio and Speech Synthesis</button>
-			</div>
+			<section>
+				<h1>Web Audio Demo</h1>
+				<p>This demo aims to highlight the differences in the way web audio is handled on different platforms.</p>
+			</section>
 
-			<audio src="https://soundbible.com/mp3/light-switch-pull-chain-daniel_simon.mp3" controls></audio>
+			<section class="demo">
+				<div>
+					<button class="recursion">Recursion</button>
+					<button class="async-loop">Async Loop</button>
+					<button class="recursion-timeout">Recursion With Timeout</button>
+					<button class="recursion-speech">Recursion With Speech Synthesis</button>
+					<button class="recursion-audio-speech">Recursion With Audio and Speech Synthesis</button>
+					<button class="async-audio-speech">Async With Audio and Speech Synthesis</button>
+				</div>
+
+				<audio src="https://soundbible.com/mp3/light-switch-pull-chain-daniel_simon.mp3" controls></audio>
+			</section>
+
+			<section>
+				<h2>Context</h2>
+				<p>
+					Safari doesn't allow for programmatically calling the "play" method on an audio element without user action.
+				</p>
+				<p>
+					This is a good feature, but it is very limiting in it's current state. It will allow you to play audio
+					sequentially if there are no asynchronous calls. When asynchrony is introduced, Safari stops playing the
+					audio.
+				</p>
+
+				<p>
+					The result is, even if the user initiates an action, no delays can be introduced. This includes anything async
+					or promise based, setTimeout, and setInterval.
+				</p>
+
+				<h2>Why is this an issue?</h2>
+				<p>
+					It removes the possibility of a certain class of sites and apps existing. Think of "turn by turn" directions
+					in a map app or having a delay between songs in a playlist that is auto playing. Many more example exist and
+					I'm happy to take pull requests for use cases.
+				</p>
+
+				<h2>One solution</h2>
+				<p>
+					Create a permission on a per site basis in the same way GPS and camera access are handled. While this may not
+					be the best solution it does create some middle ground and we can start a dialogue about how to respectful use
+					audio on the web.
+				</p>
+			</section>
+
+			<footer>
+				<a href="https://jamesgleason.tech/">More info @ jamesgleason.tech</a>
+			</footer>
 		</main>
 
 		<style>
+			body {
+				font-size: 22px;
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+					"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+				line-height: 1.5;
+			}
+
 			main {
+				min-height: 60vh;
+				margin: 0 auto;
+				max-width: 900px;
+			}
+
+			.demo {
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
 				align-items: center;
-				height: 60vh;
+				margin-block: 54px;
 			}
 
 			div {
@@ -50,6 +105,13 @@
 
 			audio {
 				margin-top: 24px;
+			}
+
+			footer {
+				display: flex;
+				justify-content: center;
+				align-items: flex-end;
+				min-height: 100px;
 			}
 		</style>
 	</body>

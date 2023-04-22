@@ -7,7 +7,7 @@ const recursionAudioSpeech = document.querySelector(".recursion-audio-speech")
 const asyncAudioSpeech = document.querySelector(".async-audio-speech")
 
 // Recursion
-recursion.addEventListener("click", () => {
+function recursionFunc() {
 	function repeat(i) {
 		const next = () => {
 			if (i >= 5 - 1) {
@@ -21,10 +21,11 @@ recursion.addEventListener("click", () => {
 		audio.play()
 	}
 	repeat(0)
-})
+}
+recursion.addEventListener("click", recursionFunc)
 
 // Async Loop
-asyncLoop.addEventListener("click", async () => {
+async function asyncLoopFunc() {
 	for (let i = 0; i < 5; i++) {
 		const resume = new CustomEvent("resume")
 		const dispatcher = () => {
@@ -32,13 +33,14 @@ asyncLoop.addEventListener("click", async () => {
 		}
 		audio.addEventListener("ended", dispatcher)
 		audio.play()
-		await pause(audio, "resume")
+		await blockUntilEvent(audio, "resume")
 		audio.removeEventListener("ended", dispatcher)
 	}
-})
+}
+asyncLoop.addEventListener("click", asyncLoopFunc)
 
 // Recursion With Timeout
-recursionTimeout.addEventListener("click", () => {
+function recursionTimeoutFunc() {
 	function repeat(i) {
 		const next = () => {
 			if (i >= 5 - 1) {
@@ -54,10 +56,11 @@ recursionTimeout.addEventListener("click", () => {
 		audio.play()
 	}
 	repeat(0)
-})
+}
+recursionTimeout.addEventListener("click", recursionTimeoutFunc)
 
 // Recursion With Speech Synthesis
-recursionSpeech.addEventListener("click", () => {
+function recursionSpeechFunc() {
 	const utterance = new SpeechSynthesisUtterance("Hello")
 	function repeat(i) {
 		const next = () => {
@@ -72,42 +75,14 @@ recursionSpeech.addEventListener("click", () => {
 		speechSynthesis.speak(utterance)
 	}
 	repeat(0)
-})
-
-function pause(elm, event) {
-	return new Promise(resolve => {
-		elm.addEventListener(event, () => {
-			resolve()
-		})
-	})
 }
-
-// Recursion With Audio and Speech Synthesis
-recursionAudioSpeech.addEventListener("click", () => {
-	const utterance = new SpeechSynthesisUtterance("Hello")
-	function repeat(i) {
-		const next = () => {
-			if (i >= 5 - 1) {
-				return
-			}
-			audio.removeEventListener("ended", next)
-			utterance.removeEventListener("end", next)
-			repeat(i + 1)
-		}
-
-		audio.addEventListener("ended", next)
-		audio.play()
-
-		utterance.addEventListener("end", next)
-		speechSynthesis.speak(utterance)
-	}
-	repeat(0)
-})
+recursionSpeech.addEventListener("click", recursionSpeechFunc)
 
 // Simulate sequential audio
 // Recursion With Audio and Speech Synthesis
-recursionAudioSpeech.addEventListener("click", () => {
+function recursionAudioSpeechFunc() {
 	const utterance = new SpeechSynthesisUtterance("Hello")
+
 	function repeat(i) {
 		console.log("CALLED:", i)
 
@@ -133,41 +108,11 @@ recursionAudioSpeech.addEventListener("click", () => {
 		audio.play()
 	}
 	repeat(0)
-})
-
-// Recursion With Audio, Speech Synthesis, and Delay
-// TODO
-recursionAudioSpeech.addEventListener("click", () => {
-	const utterance = new SpeechSynthesisUtterance("Hello")
-	function repeat(i) {
-		console.log("CALLED:", i)
-
-		const next = () => {
-			console.log("NEXT:", i)
-			if (i >= 5 - 1) {
-				return
-			}
-			audio.removeEventListener("ended", speak)
-			utterance.removeEventListener("end", next)
-			repeat(i + 1)
-		}
-
-		const speak = () => {
-			console.log("SPEAK:", i)
-
-			utterance.addEventListener("end", next)
-			speechSynthesis.speak(utterance)
-		}
-
-		console.log("AUDIO:", i)
-		audio.addEventListener("ended", speak)
-		audio.play()
-	}
-	repeat(0)
-})
+}
+recursionAudioSpeech.addEventListener("click", recursionAudioSpeechFunc)
 
 // Async Loop With Audio and Speech Synthesis
-asyncAudioSpeech.addEventListener("click", async () => {
+async function asyncAudioSpeechFunc() {
 	const utterance = new SpeechSynthesisUtterance("Hello")
 	for (let i = 0; i < 5; i++) {
 		const resume = new CustomEvent("resume")
@@ -177,7 +122,7 @@ asyncAudioSpeech.addEventListener("click", async () => {
 		}
 		audio.addEventListener("ended", audioDispatcher)
 		audio.play()
-		await pause(audio, "resume")
+		await blockUntilEvent(audio, "resume")
 		audio.removeEventListener("ended", audioDispatcher)
 
 		const speechDispatcher = () => {
@@ -185,12 +130,34 @@ asyncAudioSpeech.addEventListener("click", async () => {
 		}
 		utterance.addEventListener("end", speechDispatcher)
 		speechSynthesis.speak(utterance)
-		await pause(utterance, "resume")
+		await blockUntilEvent(utterance, "resume")
 		utterance.removeEventListener("end", speechDispatcher)
 	}
-})
+}
+asyncAudioSpeech.addEventListener("click", asyncAudioSpeechFunc)
 
-function pause(elm, event) {
+// Async Loop With Audio and Speech Synthesis to Buffer
+async function asyncAudioSpeechBufferFunc() {
+	// const utterance = new SpeechSynthesisUtterance("Hello")
+
+	for (let i = 0; i < 5; i++) {
+		const resume = new CustomEvent("resume")
+
+		const audioDispatcher = () => {
+			audio.dispatchEvent(resume)
+		}
+		audio.addEventListener("ended", audioDispatcher)
+		audio.play()
+		await blockUntilEvent(audio, "resume")
+		audio.removeEventListener("ended", audioDispatcher)
+
+		// TODO: Convert utterance to buffer and figure out how to play it
+	}
+}
+asyncAudioSpeech.addEventListener("click", asyncAudioSpeechBufferFunc)
+
+// ------------------- Methods -------------------
+function blockUntilEvent(elm, event) {
 	return new Promise(resolve => {
 		elm.addEventListener(event, () => {
 			resolve()
@@ -198,13 +165,13 @@ function pause(elm, event) {
 	})
 }
 
-function wait(ms) {
+export function wait(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-function getDur(elm, fallback = 0) {
+export function getDur(elm, fallback = 0) {
 	let dur
-	return new Promise(res => {
+	return new Promise(resolve => {
 		for (let i = 0; i < 1000; i++) {
 			if (elm.readyState >= 1) {
 				dur = elm.duration
@@ -224,9 +191,9 @@ function getDur(elm, fallback = 0) {
 		}
 
 		if (dur) {
-			res(dur)
+			resolve(dur)
 		} else {
-			res(fallback)
+			resolve(fallback)
 		}
 	})
 }

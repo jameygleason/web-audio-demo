@@ -9,14 +9,14 @@
 
 		<link
 			rel="icon"
-			href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 16 16'><text x='0' y='14'>💩</text></svg>"
+			href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 16 16'><text x='0' y='14'>🔊</text></svg>"
 		/>
 
 		<meta property="og:image" content="/images/web-audio-og-w1200.jpg" />
 		<meta name="twitter:image" content="/images/web-audio-og-w1200.jpg" />
 
 		<link rel="stylesheet" href="/styles.css" />
-		<script src="/main.js" defer></script>
+		<script src="/main.js" type="module" defer></script>
 	</head>
 	<body>
 		<header>
@@ -40,8 +40,9 @@
 					<button class="async-loop works">Async Loop</button>
 					<button class="recursion-timeout works">Recursion With Timeout</button>
 					<button class="recursion-speech works">Recursion With Speech Synthesis</button>
-					<button class="recursion-audio-speech todo">Recursion With Audio and Speech Synth.</button>
+					<button class="recursion-audio-speech broken">Recursion With Audio and Speech Synth.</button>
 					<button class="async-audio-speech broken">Async With Audio and Speech Synthesis</button>
+					<button class="async-audio-speech-buffer todo">Async With Audio and Speech to Buffer</button>
 				</div>
 
 				<!-- https://soundbible.com/2167-Light-Pull-Chain.html -->
